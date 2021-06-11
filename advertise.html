@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="advertisestyle.css">
+  <title></title>
+</head>
+
+<body>
+  <ul class="nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="farmshow.html">Farms Show</a></li>
+      <li><a href="advertise.html">Advertise</a></li>
+  </ul>
+  <div class="main">
+    <p class="sign" align="center">Enter Your Information To Advertise Your Farm</p>
+    <form id="myForm">
+    <label for="name">Name</label>
+    <input id="name" name="name" value="">
+    <br>
+    <label for="address">Address</label>
+    <input id="address" name="address" value="">
+    <br>
+    <label for="emailaddress">Email</label>
+    <input id="emailaddress" name="emailaddress" value="">
+    <br>
+    <label for="phonenumber">Phone</label>
+    <input id="phonenumber" name="phonenumber" value="">
+    <br>
+    <label for="imageurl">ImageUrl</label>
+    <input id="imageurl" name="imageurl" value="">
+    <br>
+    
+    <input class="submit" type="submit" value="Submit" >
+</form>
+    </div>
+     
+</body>
+
+<script type="text/javascript">
+  
+  const thisForm = document.getElementById('myForm');
+  thisForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const formData = new FormData(thisForm).entries()
+    const response = await fetch('https://nitdanewapi.herokuapp.com/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData))
+    });
+
+    const result = await response.json();
+    console.log(result)
+  
+});
+</script>
+
+</html>
